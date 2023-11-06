@@ -135,6 +135,8 @@ sap.ui.define(
               // download(imageData, fileName + ".png", "image/png");
               that.stopCamera(that.stream);
               that.loadTesseract(imageData).then((result) => {
+                let confidence = result.confidence;
+                console.log(confidence);
                 MessageBox.show(result);
               });
             }
@@ -158,13 +160,13 @@ sap.ui.define(
         const worker = await createWorker("eng");
         const ret = await worker.recognize(
           // "https://tesseract.projectnaptha.com/img/eng_bw.png"
-          // "../assets/pln1.jpeg",
-          imgdata,
+          "../assets/pln2.jpeg",
+          // imgdata,
           {
             // oem: 1,
             // psm: 3
-            lang: "eng"
-            // tessedit_char_whitelist: "0123456789"
+            lang: "eng",
+            tessedit_char_whitelist: "0123456789"
           }
         );
         console.log(ret.data.text);
